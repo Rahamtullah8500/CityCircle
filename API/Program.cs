@@ -1,3 +1,5 @@
+using Application.activities.queries;
+using Application.core;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -12,6 +14,8 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddCors();
+builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetActivityList.Handler>());
+builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfiles).Assembly);
 
 var app = builder.Build();
 
@@ -23,7 +27,10 @@ var app = builder.Build();
 
 // app.UseHttpsRedirection();
 
-app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000","https://localhost:3000/"));
+app.UseCors(x => x
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .WithOrigins("https://localhost:3000", "http://localhost:3000"));
 
 app.MapControllers();
 
@@ -36,10 +43,10 @@ try
     await context.Database.MigrateAsync();
     await DbInitializer.SeedData(context);
 }
-catch(Exception ex)
+catch (Exception ex)
 {
     var logger = service.GetRequiredService<ILogger<Program>>();
-    logger.LogError(ex,"An error occured during migration");
+    logger.LogError(ex, "An error occured during migration");
 }
 
 
