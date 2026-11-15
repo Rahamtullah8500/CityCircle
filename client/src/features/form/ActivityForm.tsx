@@ -1,4 +1,4 @@
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router";
 import { useActivities } from "../../lib/hooks/UseActivities";
 
@@ -33,31 +33,35 @@ export default function ActivityForm() {
     if (isLoadingActivity) return <Typography>Loading activity...</Typography>;
 
     return (
-        <Paper sx={{ borderRadius: 3, padding: 3 }}>
-            <Typography variant="h5" gutterBottom color="primary">
-                {activity ? 'Edit Activity' : 'Create Activity'}
-            </Typography>
-            <Box component='form' onSubmit={handleSubmit} sx={{display:'flex',flexDirection:'column',gap:"6px"}}>
-                <TextField name='title' label='Title' defaultValue={activity?.title || ''} />
-                <TextField name='description' label='Description' defaultValue={activity?.category || ''} multiline rows={3} />
-                <TextField name='category' defaultValue={activity?.category || ''} label='Category' />
-                <TextField name='date' defaultValue={activity?.date
-                    ? new Date(activity.date).toISOString().split('T')[0]
-                    : new Date().toISOString().split('T')[0]}
-                    label='Date' type="date"
-                />
-                <TextField name='city' defaultValue={activity?.city || ''} label='City' />
-                <TextField name='venue' defaultValue={activity?.venue || ''} label='Venue' />
-                <Box sx={{display:'flex',flexDirection:'column',gap:"6px"}}>
-                    <Button color='inherit'>Cancel</Button>
-                    <Button
-                        type="submit"
-                        color='success'
-                        variant="contained"
-                        loading={updateActivity.isPending || createActivity.isPending}
-                    >Submit</Button>
-                </Box>
-            </Box>
-        </Paper>
+        <Grid container  sx={{justifyContent:'center'}}>
+            <Grid size={6}>
+                <Paper sx={{ borderRadius: 3, padding: 3 }}>
+                    <Typography variant="h5" gutterBottom color="primary">
+                        {activity ? 'Edit Activity' : 'Create Activity'}
+                    </Typography>
+                    <Box component='form' onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: "12px" }}>
+                        <TextField name='title' label='Title' defaultValue={activity?.title || ''} />
+                        <TextField name='description' label='Description' defaultValue={activity?.category || ''} multiline rows={3} />
+                        <TextField name='category' defaultValue={activity?.category || ''} label='Category' />
+                        <TextField name='date' defaultValue={activity?.date
+                            ? new Date(activity.date).toISOString().split('T')[0]
+                            : new Date().toISOString().split('T')[0]}
+                            label='Date' type="date"
+                        />
+                        <TextField name='city' defaultValue={activity?.city || ''} label='City' />
+                        <TextField name='venue' defaultValue={activity?.venue || ''} label='Venue' />
+                        <Box sx={{ display: 'flex', gap: "6px",justifyContent:"end" }}>
+                            <Button color='inherit'>Cancel</Button>
+                            <Button
+                                type="submit"
+                                color='success'
+                                variant="contained"
+                                loading={updateActivity.isPending || createActivity.isPending}
+                            >Submit</Button>
+                        </Box>
+                    </Box>
+                </Paper>
+            </Grid>
+        </Grid>
     )
 }

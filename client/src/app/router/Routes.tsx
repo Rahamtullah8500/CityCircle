@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import App from "../loyout/App";
-import ActivityDetails from "../../features/details/ActivityDetails";
+import ActivityDetailsPage from "../../features/details/ActivityDetailsPage";
 import ActivityForm from "../../features/form/ActivityForm";
 import ActivityDashboard from "../../features/dashboard/ActivityDashboard";
 import HomePage from "../../features/home/HomePage";
@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
         children: [
             { path: '', element: <HomePage /> },
             { path: 'activities', element: <ActivityDashboard /> },
-            { path: 'activities/:id', element: <ActivityDetails /> },
+            { path: 'activities/:id', element: <ActivityDetailsPage /> },
             { path: 'createActivity', element: <ActivityForm key='create' /> },
             { path: 'manage/:id', element: <ActivityForm /> },
         ]
