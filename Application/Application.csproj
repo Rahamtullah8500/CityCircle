@@ -3,11 +3,21 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="16.3.0" />
     <PackageReference Include="MediatR" Version="14.2.0" />
+  </ItemGroup>
+
+    <ItemGroup>
+    <Folder Include="activities/" />
+    <Folder Include="activities/Commands/" />
+    <Folder Include="activities/DTOs/" />
+    <Folder Include="activities/Queries/" />
+    <Folder Include="activities/Validators/" />
+    <Folder Include="core/" />
   </ItemGroup>
 
   <PropertyGroup>

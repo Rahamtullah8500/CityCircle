@@ -5,8 +5,8 @@ interface Store {
     uiStore: UiStore
 }
 
-export const Store: Store = {
+export const store: Store = {
     uiStore: new UiStore()
 }
 
-export const StoreContext = createContext(Store);
+export const StoreContext = createContext(store);
